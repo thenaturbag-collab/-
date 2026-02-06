@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Pro - Final Prototype</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap');
+        body { font-family: 'Kanit', sans-serif; background-color: #f0f4f8; }
+        .page { display: none; min-height: 100vh; }
+        .page.active { display: block; animation: fadeIn 0.2s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .clickable:active { transform: scale(0.97); transition: 0.1s; }
+    </style>
+</head>
+<body class="max-w-md mx-auto bg-white shadow-2xl min-h-screen relative">
+
+    <div id="page-home" class="page active">
+        <header class="bg-[#1a237e] text-white p-6 rounded-b-[2.5rem] shadow-xl">
+            <div class="flex justify-between items-start">
+                <div onclick="goToPage('page-profile')" class="flex items-center space-x-3 cursor-pointer clickable bg-white/5 p-2 rounded-2xl">
+                    <div class="w-12 h-12 bg-gray-400 rounded-full border-2 border-yellow-400 overflow-hidden flex items-center justify-center text-2xl">👤</div>
+                    <div>
+                        <h1 class="font-bold text-lg">นายมั่งมี ศรีสุข</h1>
+                        <div class="flex items-center text-[11px] text-yellow-300">
+                            <span>⭐ เรตติ้งความประพฤติ: 9.8/10</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <p class="text-[10px] opacity-70 font-bold uppercase">Credit</p>
+                    <p class="text-xl font-bold">850</p>
+                </div>
+            </div>
+            <div class="mt-6 grid grid-cols-2 gap-3">
+                <div class="bg-white/10 p-4 rounded-2xl border border-white/10">
+                    <p class="text-[10px] uppercase opacity-60">กำไรสะสม</p>
+                    <p class="text-xl font-bold text-green-400">+฿4,250</p>
+                </div>
+                <div class="bg-white/10 p-4 rounded-2xl border border-white/10">
+                    <p class="text-[10px] uppercase opacity-60">วงเงินเล่นได้</p>
+                    <p class="text-xl font-bold text-blue-300">฿8,000</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="p-5 space-y-4 pb-10">
+            <h2 class="font-bold text-gray-800 text-sm px-1">วงแชร์ที่เปิดรับสมัคร</h2>
+            
+            <div class="space-y-3">
+                <div onclick="goToPage('page-room')" class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm cursor-pointer hover:border-blue-500 clickable">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded uppercase">รายสัปดาห์</span>
+                        <span class="text-[10px] text-gray-400">สมาชิก 8/10</span>
+                    </div>
+                    <h3 class="font-bold text-gray-700">วงออมเพื่อนไอที 2026</h3>
+                    <p class="text-xs text-gray-500 mt-1">มือละ ฿1,000 | เป้าหมาย: ฿10,000</p>
+                </div>
+
+                <div class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm opacity-50">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-[10px] font-bold text-purple-600 bg-purple-50 px-2 py-0.5 rounded">รายเดือน</span>
+                        <span class="text-[10px] text-red-500 font-bold">เต็ม</span>
+                    </div>
+                    <h3 class="font-bold text-gray-700">วงแม่บ้านมหาชน</h3>
+                    <p class="text-xs text-gray-500 mt-1">มือละ ฿3,000 | เป้าหมาย: ฿36,000</p>
+                </div>
+
+                <div class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm cursor-pointer hover:border-blue-500 clickable" onclick="goToPage('page-room')">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-[10px] font-bold text-orange-600 bg-orange-50 px-2 py-0.5 rounded uppercase">รายวัน</span>
+                        <span class="text-[10px] text-gray-400">สมาชิก 3/5</span>
+                    </div>
+                    <h3 class="font-bold text-gray-700">แชร์ด่วนตลาดสด</h3>
+                    <p class="text-xs text-gray-500 mt-1">มือละ ฿500 | เป้าหมาย: ฿2,500</p>
+                </div>
+            </div>
+
+                <button onclick="goToPage('page-create')" class="w-full py-8 border-2 border-dashed border-gray-200 rounded-2xl text-gray-400 font-bold hover:bg-blue-50 hover:border-blue-300 hover:text-blue-500 transition-all">
+                + เปิดห้องแชร์ใหม่ (Custom)
+            </button>
+        </main>
+    </div>
+
+    <div id="page-create" class="page">
+        <header class="p-6 flex items-center space-x-4">
+            <button onclick="goToPage('page-home')" class="text-gray-500 text-xl">←</button>
+            <h1 class="text-xl font-bold text-gray-800">สร้างวงแชร์ใหม่</h1>
+        </header>
+        <main class="p-6 space-y-6">
+            <div class="space-y-2">
+                <label class="text-sm font-bold text-gray-600">ชื่อวงแชร์</label>
+                <input type="text" placeholder="เช่น ออมเงินเที่ยวญี่ปุ่น" class="w-full border-b-2 border-gray-100 p-2 focus:border-blue-500 outline-none">
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="space-y-2">
+                    <label class="text-sm font-bold text-gray-600">เงินต้น (บาท)</label>
+                    <input type="number" value="1000" class="w-full border-b-2 border-gray-100 p-2 focus:border-blue-500 outline-none">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-sm font-bold text-gray-600">จำนวนสมาชิก</label>
+                    <input type="number" value="10" class="w-full border-b-2 border-gray-100 p-2 focus:border-blue-500 outline-none">
+                </div>
+            </div>
+            <div class="space-y-2">
+                <label class="text-sm font-bold text-gray-600">ความถี่ในการเปีย</label>
+                <select class="w-full border-b-2 border-gray-100 p-2 outline-none">
+                    <option>รายวัน</option>
+                    <option selected>รายสัปดาห์</option>
+                    <option>รายเดือน</option>
+                </select>
+            </div>
+            <div class="bg-blue-50 p-4 rounded-xl">
+                <p class="text-xs text-blue-800"><b>* ระบบความปลอดภัย:</b> วงนี้จะจำกัดเฉพาะสมาชิกที่มีเครดิต 700+ และมีเงินออมค้ำประกันขั้นต่ำ 5,000 บาท</p>
+            </div>
+            <button onclick="goToPage('page-home')" class="w-full py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-lg shadow-blue-200">เปิดวงแชร์เลย</button>
+        </main>
+    </div>
+
+    <div id="page-room" class="page bg-gray-50">
+        <header class="p-4 border-b flex items-center space-x-3 bg-white sticky top-0 z-10">
+            <button onclick="goToPage('page-home')" class="text-2xl">←</button>
+            <h2 id="room-name-header" class="font-bold text-gray-800">วงออมเพื่อนไอที 2026</h2>
+        </header>
+        <main class="p-4 space-y-4 pb-24">
+            <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-xl">
+                <p class="text-xs font-bold text-green-700">✅ งวดที่ 2: สำเร็จ</p>
+                <p class="text-[10px] text-green-600">นายสมชายได้รับเงิน ฿9,250 แล้ว</p>
+            </div>
+            <div class="flex items-start space-x-2">
+                <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-[10px] text-white">Bot</div>
+                <div class="bg-white p-3 rounded-2xl shadow-sm border text-sm max-w-[80%]">
+                    งวดที่ 3 เริ่มแล้ว! ใส่ยอดดอกเบี้ยเพื่อประมูลได้เลยครับ
+                </div>
+            </div>
+        </main>
+        <div class="fixed bottom-0 w-full max-w-md bg-white border-t p-4 flex space-x-2">
+            <input type="number" placeholder="ใส่ดอกเบี้ย..." class="flex-1 border rounded-xl px-4 py-2 bg-gray-50 outline-none">
+            <button onclick="alert('ส่งยอดประมูลสำเร็จ!')" class="bg-blue-700 text-white px-6 py-2 rounded-xl font-bold">เปีย</button>
+        </div>
+    </div>
+
+    <div id="page-profile" class="page bg-white">
+        <nav class="p-5 flex items-center space-x-4 border-b">
+            <button onclick="goToPage('page-home')" class="text-2xl">←</button>
+            <h1 class="text-xl font-bold uppercase tracking-tight">Financial Dashboard</h1>
+        </nav>
+        <main class="p-6 space-y-6">
+            <div class="bg-gray-50 p-4 rounded-[2rem] border shadow-inner">
+                <h3 class="text-center text-[10px] font-bold text-gray-400 mb-4 uppercase">สถิติกำไรสะสม (6 เดือน)</h3>
+                <canvas id="chartProfile"></canvas>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-blue-50 p-5 rounded-3xl">
+                    <p class="text-[10px] text-blue-500 font-bold uppercase">เงินสะสม</p>
+                    <p class="text-xl font-bold text-blue-900">฿45,000</p>
+                </div>
+                <div class="bg-green-50 p-5 rounded-3xl">
+                    <p class="text-[10px] text-green-600 font-bold uppercase">กำไรสุทธิ</p>
+                    <p class="text-xl font-bold text-green-700">+฿4,250</p>
+                </div>
+            </div>
+            <div class="bg-indigo-900 text-white p-6 rounded-[2.5rem]">
+                <p class="text-xs text-yellow-400 font-bold uppercase mb-2">AI Summary</p>
+                <p class="text-sm opacity-90 leading-relaxed">วินัยยอดเยี่ยม! เรตติ้ง 9.8/10 ของคุณช่วยให้คุณเข้าถึงวงแชร์ระดับพรีเมียมได้ทันที</p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // ระบบจัดการหน้าจอ (Navigation)
+        function goToPage(pageId) {
+            // ปิดทุกหน้า
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(p => p.classList.remove('active'));
+            
+            // แสดงหน้าที่เลือก
+            const target = document.getElementById(pageId);
+            if(target) {
+                target.classList.add('active');
+                window.scrollTo(0,0);
+            }
+
+            // ถ้าไปหน้า Profile ให้วาดกราฟ
+            if(pageId === 'page-profile') {
+                renderMyChart();
+            }
+        }
+
+        // ระบบยืนยันสร้างห้อง
+        function confirmCreate() {
+            const val = document.getElementById('new-room-input').value || "วงแชร์ใหม่ของฉัน";
+            document.getElementById('room-name-header').innerText = val;
+            alert('สร้างห้องสำเร็จ! กำลังไปที่หน้าแชท...');
+            goToPage('page-room');
+        }
+
+        // ระบบกราฟ (Chart.js)
+        let chartInstance = null;
+         function renderMyChart() {
+            const ctx = document.getElementById('chartProfile');
+            if(!ctx) return;
+            if(chartInstance) chartInstance.destroy();
+
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'],
+                    datasets: [{
+                        data: [500, 1300, 2000, 2800, 3400, 4250],
+                        borderColor: '#1a237e',
+                        backgroundColor: 'rgba(26, 35, 126, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    plugins: { legend: { display: false } },
+                    scales: { y: { display: false }, x: { grid: { display: false } } }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
